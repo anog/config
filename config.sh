@@ -15,13 +15,21 @@ install () {
     subversion \
     byacc bison \
     flex \
-    autoconf \ # protobuf, googlemock
-    libtool # protobuf
+    autoconf \
+    libtool \
+    openjdk-7-jdk
+# autoconf: protobuf, googlemock
+# libtool: protobuf
 }
 
 install_chrome () {
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
   sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+}
+
+git_config() {
+  git config --global user.name "Andre Nogueira"
+  git config --global user.email "andre.nogueira@gmail.com"
 }
 
 install_libs() {
@@ -72,6 +80,7 @@ install_lib_googlemock() {
 
 all () {
   update_upgrade
+  git_config
   install
   install_chrome
   install_libs
